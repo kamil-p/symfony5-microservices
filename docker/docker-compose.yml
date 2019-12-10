@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  db:
+    image: mysql
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}docker
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  app_php:
+    build:
+      context: php-fpm
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ${SYMFONY_APP_PATH}:/var/www/symfony
+      - ./logs/symfony:/var/www/symfony/var/logs
+  app_nginx:
+    build: app_nginx
+    ports:
+      - 80:80
+    volumes_from:
+      - app_php
+    volumes:
+      - ./logs/app_nginx/:/var/log/nginx
