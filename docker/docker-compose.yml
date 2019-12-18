@@ -16,15 +16,12 @@ services:
       args:
         TIMEZONE: ${TIMEZONE}
     volumes:
-      - php:/var/www/symfony
+      - ../app/symfony:/var/www/symfony
       - ./logs/symfony:/var/www/symfony/var/logs
   app_nginx:
     build: app_nginx
     ports:
       - 80:80
     volumes:
-      - php
+      - ../app/symfony:/var/www/symfony
       - ./logs/app_nginx/:/var/log/nginx
-
-volumes:
-  php:
