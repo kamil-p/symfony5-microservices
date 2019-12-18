@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   db:
@@ -16,13 +16,15 @@ services:
       args:
         TIMEZONE: ${TIMEZONE}
     volumes:
-      - ${SYMFONY_APP_PATH}:/var/www/symfony
+      - php:/var/www/symfony
       - ./logs/symfony:/var/www/symfony/var/logs
   app_nginx:
     build: app_nginx
     ports:
       - 80:80
-    volumes_from:
-      - app_php
     volumes:
+      - php
       - ./logs/app_nginx/:/var/log/nginx
+
+volumes:
+  php:
