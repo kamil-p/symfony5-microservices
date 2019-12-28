@@ -6,7 +6,8 @@ MAINTAINER Kamil Purzynski <kamil.purzynski@gmail.com>
 RUN apt-get update && apt-get install -y \
     openssl \
     git \
-    unzip
+    unzip \
+    fish
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
