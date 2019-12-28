@@ -7,21 +7,23 @@ services:
       - ./volumes/db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}docker
+      MYSQL_DATABASE: ${MYSQL_APP_DB}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
   app_php:
     build:
-      context: php-fpm
+      context: ../app/docker/nginx
       args:
         TIMEZONE: ${TIMEZONE}
     volumes:
       - ../app/symfony:/var/www/symfony
       - ./volumes/logs/app_php/:/var/www/symfony/var/logs
   app_nginx:
-    build: app_nginx
+    build: ../app/docker/nginx
     ports:
       - 80:80
     volumes:
       - ../app/symfony:/var/www/symfony
-      - ./volumes/logs/app_nginx/:/var/log/nginx
+      - ./volumes/logs/nginx/:/var/log/nginx
