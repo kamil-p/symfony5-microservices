@@ -12,9 +12,10 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 3306:3306
+
   app_php:
     build:
-      context: ../app/docker/nginx
+      context: ../app/docker/php_fpm
       args:
         TIMEZONE: ${TIMEZONE}
     volumes:
@@ -26,4 +27,20 @@ services:
       - 80:80
     volumes:
       - ../app/symfony:/var/www/symfony
+      - ./volumes/logs/nginx/:/var/log/nginx
+
+  iam_php:
+    build:
+      context: ../iam/docker/php_fpm
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ../iam/symfony:/var/www/symfony
+      - ./volumes/logs/iam_php/:/var/www/symfony/var/logs
+  iam_nginx:
+    build: ../iam/docker/nginx
+    ports:
+      - 81:80
+    volumes:
+      - ../iam/symfony:/var/www/symfony
       - ./volumes/logs/nginx/:/var/log/nginx
