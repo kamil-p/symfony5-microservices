@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.2.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -75,11 +78,20 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.38"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.1"
+    },
     "nikic/php-parser": {
         "version": "v4.3.0"
+    },
+    "nubs/random-name-generator": {
+        "version": "v2.1.0"
     },
     "ocramius/package-versions": {
         "version": "1.5.1"
@@ -251,6 +263,9 @@
     },
     "symfony/yaml": {
         "version": "v5.0.1"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.0"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"
