@@ -22,8 +22,22 @@ class Repo
      */
     protected UuidInterface $id;
 
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="repos")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
+    private $user;
+
     /** @Column(type="string") */
     protected string $name;
+
+    public function __construct(User $user, string $name)
+    {
+        $this->user = $user;
+        $this->name = $name;
+    }
+
 
     public function getId(): UuidInterface
     {

@@ -1,6 +1,7 @@
 <?php
 namespace App\Command;
 
+use App\Entity\Repo;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Nubs\RandomNameGenerator\All;
@@ -11,19 +12,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateUserCommand extends Command
 {
-    protected static $defaultName = 'app:create-user';
+    protected static $defaultName = 'app:create-repo';
 
     private UserRepository $userRepo;
-    
-    private All $firstNameGenerator;
-    private All $lastNameGenerator;
+
+    private All $nameGenerator;
 
     public function __construct(UserRepository $userRepo)
     {
         parent::__construct();
         $this->userRepo = $userRepo;
-        $this->firstNameGenerator = new All([new Alliteration()]);
-        $this->lastNameGenerator = new All([new Alliteration()]);
+        $this->nameGenerator = new All([new Alliteration()]);
     }
 
 
@@ -36,14 +35,11 @@ class CreateUserCommand extends Command
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $user = new User();
-        $user->setFirstName(str_replace(' ','',$this->firstNameGenerator->getName()));
-        $user->setLastName(str_replace(' ','', $this->lastNameGenerator->getName()));
-        $user->setEmail(
-            strtolower($user->getFirstName()) . '.' . strtolower($user->getLastName())
-        );
+        $user = $this->userRepo->findLast();
 
-        $this->userRepo->save($user);
+        $repo = new Repo($user, $this->getName());
+
+        $this->userRepo->save($repo);
 
         $output->writeln($user->toString());
 

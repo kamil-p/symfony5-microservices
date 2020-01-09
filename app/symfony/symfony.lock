@@ -90,6 +90,9 @@
     "nikic/php-parser": {
         "version": "v4.3.0"
     },
+    "nubs/random-name-generator": {
+        "version": "v2.1.0"
+    },
     "ocramius/package-versions": {
         "version": "1.5.1"
     },

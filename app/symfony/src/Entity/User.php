@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -12,15 +13,19 @@ use Ramsey\Uuid\UuidInterface;
  */
 class User
 {
-    use TimestampableEntity;
-    
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
-    private UuidInterface $id;
+    protected UuidInterface $id;
+
+    /**
+     * @var Repo[]
+     * @ORM\OneToMany(targetEntity="Repo", mappedBy="user")
+     */
+    private Collection $repos;
 
     /** @Column(type="string") */
     private string $firstName;
@@ -31,12 +36,9 @@ class User
     /** @Column(type="string") */
     private string $email;
 
-    public function __construct()
+    private function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
     }
-
 
     public function getId(): UuidInterface
     {
@@ -75,6 +77,6 @@ class User
     
     public function toString(): string
     {
-        return "{$this->getFirstName()} {$this->getLastName()} {$this->getEmail()}@fake.mail.com created at: {$this->getCreatedAt()->format(\DateTime::ATOM)}";
+        return "{$this->getFirstName()} {$this->getLastName()} {$this->getEmail()}@fake.mail.com";
     }
 }

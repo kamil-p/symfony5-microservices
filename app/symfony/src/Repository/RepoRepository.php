@@ -1,9 +1,13 @@
 <?php
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Repo;
+use Doctrine\Persistence\ManagerRegistry;
 
-class RepoRepository extends EntityRepository
+class RepoRepository extends AbstractRepository
 {
-
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Repo::class);
+    }
 }
