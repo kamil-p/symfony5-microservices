@@ -36,6 +36,8 @@ class Repo
     {
         $this->user = $user;
         $this->name = $name;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
 

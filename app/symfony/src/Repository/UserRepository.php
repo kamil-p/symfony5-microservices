@@ -14,7 +14,6 @@ class UserRepository extends AbstractRepository
     public function findLast(): ?User
     {
         return $this->createQueryBuilder('u')
-            ->orderBy('u.createdAt')
             ->getQuery()
             ->setMaxResults(1)
             ->getOneOrNullResult();
