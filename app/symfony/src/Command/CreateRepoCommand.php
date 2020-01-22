@@ -2,7 +2,6 @@
 namespace App\Command;
 
 use App\Entity\Repo;
-use App\Entity\User;
 use App\Repository\UserRepository;
 use Nubs\RandomNameGenerator\All;
 use Nubs\RandomNameGenerator\Alliteration;
