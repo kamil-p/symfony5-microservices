@@ -8,10 +8,10 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="DeveloperRepository")
+ * @ORM\Table(name="developer")
  */
-class User
+class Developer
 {
     /**
      * @ORM\Id

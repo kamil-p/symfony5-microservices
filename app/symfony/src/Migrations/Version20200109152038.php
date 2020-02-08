@@ -22,7 +22,7 @@ final class Version20200109152038 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE VIEW user AS SELECT user.id, user.first_name, user.last_name, user.email FROM iam.user');
+        $this->addSql('CREATE VIEW developer AS SELECT user.id, user.first_name, user.last_name, user.email FROM iam.user');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20200109152038 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP VIEW user');
+        $this->addSql('DROP VIEW developer');
     }
 }

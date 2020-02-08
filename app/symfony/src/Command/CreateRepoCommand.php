@@ -2,7 +2,7 @@
 namespace App\Command;
 
 use App\Entity\Repo;
-use App\Repository\UserRepository;
+use App\Repository\DeveloperRepository;
 use Nubs\RandomNameGenerator\All;
 use Nubs\RandomNameGenerator\Alliteration;
 use Symfony\Component\Console\Command\Command;
@@ -13,14 +13,14 @@ class CreateRepoCommand extends Command
 {
     protected static $defaultName = 'app:create-repo';
 
-    private UserRepository $userRepo;
+    private DeveloperRepository $developerRepository;
 
     private All $nameGenerator;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(DeveloperRepository $userRepo)
     {
         parent::__construct();
-        $this->userRepo = $userRepo;
+        $this->developerRepository = $userRepo;
         $this->nameGenerator = new All([new Alliteration()]);
     }
 
@@ -34,13 +34,13 @@ class CreateRepoCommand extends Command
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $user = $this->userRepo->findLast();
+        $developer = $this->developerRepository->findLast();
 
-        $repo = new Repo($user, $this->getName());
+        $repo = new Repo($developer, $this->getName());
 
-        $this->userRepo->save($repo);
+        $this->developerRepository->save($repo);
 
-        $output->writeln($user->toString());
+        $output->writeln($developer->toString());
 
         return 0;
     }

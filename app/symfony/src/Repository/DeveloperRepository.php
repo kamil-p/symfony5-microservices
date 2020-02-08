@@ -1,17 +1,17 @@
 <?php
 namespace App\Repository;
 
-use App\Entity\User;
+use App\Entity\Developer;
 use Doctrine\Persistence\ManagerRegistry;
 
-class UserRepository extends AbstractRepository
+class DeveloperRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($registry, Developer::class);
     }
     
-    public function findLast(): ?User
+    public function findLast(): ?Developer
     {
         return $this->createQueryBuilder('u')
             ->getQuery()

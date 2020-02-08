@@ -23,18 +23,18 @@ class Repo
     protected UuidInterface $id;
 
     /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="repos")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @var Developer
+     * @ORM\ManyToOne(targetEntity="Developer", inversedBy="repos")
+     * @ORM\JoinColumn(name="developer_id", referencedColumnName="id", nullable=false)
      */
-    private $user;
+    private $developer;
 
     /** @Column(type="string") */
     protected string $name;
 
-    public function __construct(User $user, string $name)
+    public function __construct(Developer $user, string $name)
     {
-        $this->user = $user;
+        $this->developer = $user;
         $this->name = $name;
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
